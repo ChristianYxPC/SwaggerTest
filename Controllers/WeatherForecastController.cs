@@ -98,6 +98,8 @@ namespace SwaggerTest.Controllers
         #region TestRequest
 
         [AllowAnonymous]
+        [SwaggerOperation(Summary = "List From Form Attribute", Description = "List from FromFormAttribute/[FromForm] params and with the use of FromFOrmWithListSwaggerFilter to show form params format for sending")]
+        [SwaggerResponse(StatusCodes.Status200OK, Type = typeof(List<Item>), Description = "Success")]
         [HttpPost("/FromForm/List/Item")]
         public IActionResult TestItemRequest(
             [FromForm] Item requests)
@@ -111,6 +113,8 @@ namespace SwaggerTest.Controllers
         }
 
         [AllowAnonymous]
+        [SwaggerOperation(Summary = "Nested List From Form Attribute", Description = "Nested List from FromFormAttribute/[FromForm] params and with the use of FromFOrmWithListSwaggerFilter to show form params format for sending")]
+        [SwaggerResponse(StatusCodes.Status200OK, Type = typeof(List<Item>), Description = "Success")]
         [HttpPost("/FromForm/List")]
         public IActionResult TestRequest(
             //[FromForm] Item requests)
