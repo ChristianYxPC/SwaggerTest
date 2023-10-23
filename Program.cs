@@ -10,11 +10,17 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
+builder.Services.AddSingleton(builder.Configuration);
+
 builder.Services.AddControllers( option =>
 {
 });
 
+
+
 builder.Services.AddSwaggerConfig();
+
+builder.Services.AddDatabaseConfig();
 
 // NOTE: add default versioning
 builder.Services.AddApiVersioning(cfg =>
