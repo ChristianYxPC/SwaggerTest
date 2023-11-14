@@ -1,4 +1,5 @@
-﻿using SwaggerTest.Enums;
+﻿using Microsoft.EntityFrameworkCore;
+using SwaggerTest.Enums;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -39,5 +40,7 @@ namespace SwaggerTest.Data
 
         public GenderEnum GenderEnum { get; set; }
         public GenderByteEnum GenderByteEnum { get; set; }
+        [Column(TypeName = "nvarchar(50)")]
+        public GenderByteEnum GenderStr { get; set; }
     }
 }

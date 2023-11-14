@@ -1,7 +1,9 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using SwaggerTest.Data;
 using SwaggerTest.Enums;
 using SwaggerTest.Models;
+using SwaggerTest.Services.Contexts;
 using Swashbuckle.AspNetCore.Annotations;
 using System.ComponentModel.DataAnnotations;
 using System.Reflection;
@@ -125,6 +127,28 @@ namespace SwaggerTest.Controllers
                 return BadRequest(ModelState);
             }
             return Ok(requests);
+        }
+
+        [AllowAnonymous]
+        [SwaggerOperation(Description = "Save DataType")]
+        [SwaggerResponse(StatusCodes.Status200OK, Type = typeof(DataTypeTable), Description = "Success")]
+        [HttpPost("DataType/Save")]
+        public async Task<IActionResult> TestRequest(
+            [FromBody] DataTypeTable dataType,
+            TestDbContext testDb)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            testDb.DataTypeTables.Add(dataType);
+            if(await testDb.SaveChangesAsync() < 1)
+            {
+                return BadRequest("Something went wrong in saving DataTypeTable");
+            }
+
+            return Ok(dataType);
         }
 
         #endregion
